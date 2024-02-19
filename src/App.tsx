@@ -1,38 +1,23 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import style from "./App.module.css";
+import Button from "./components/buttons/Button";
+import InputField from "./components/text-inputs/InputField";
 
 function App() {
-    const [count, setCount] = useState(0);
-
     return (
-        <>
-            <div>
-                <a href="https://vitejs.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img
-                        src={reactLogo}
-                        className="logo react"
-                        alt="React logo"
-                    />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
-        </>
+        <div className={style.blog}>
+            <form className={style["blog-form"]}>
+                <div className={style["blog-inputs"]}>
+                    <InputField name="title" label="Title" value="" onChange={() => {}} />
+                    <InputField name="text" label="Blog Text" value="" onChange={() => {}} />
+                    <InputField name="author" label="Author" value="" onChange={() => {}} />
+                </div>
+                <div className={style["blog-form-actions"]}>
+                    <Button type="submit" onClick={() => {}}>
+                        Submit
+                    </Button>
+                </div>
+            </form>
+        </div>
     );
 }
 
