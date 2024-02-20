@@ -1,4 +1,4 @@
-import { FormEvent, useId, useReducer, useState } from "react";
+import { FormEvent, useReducer, useState } from "react";
 import style from "./App.module.css";
 import Button from "./components/buttons/Button";
 import Card from "./components/cards/Card";
@@ -43,7 +43,7 @@ const intialState = {
     author: "",
 };
 
-type Blog = {
+export type Blog = {
     id: string;
     title: string;
     text: string;
@@ -69,6 +69,12 @@ function App() {
             fieldName: "title",
             payload: "",
         });
+    };
+
+    const handleOnRemoveBlog = (blogId: string) => {
+        if (!blogId) return;
+        const filteredBlogList = blogsList?.filter(({ id }: Blog) => id !== blogId);
+        setBlogsList(filteredBlogList);
     };
 
     return (
@@ -106,19 +112,15 @@ function App() {
                     </Button>
                 </div>
             </form>
-            <br />
-            <br />
-            <br />
-            <div
-                className={style["blog-cards"]}
-                // style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))", gap: "1rem" }}
-            >
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-            </div>
+            {blogsList?.length > 0 && (
+                <div className={style["blog-cards"]}>
+                    {blogsList?.map((blog: Blog) => {
+                        return <Card key={blog.id} {...blog} onRemove={handleOnRemoveBlog} />;
+                    })}
+                </div>
+            )}
+
+            {blogsList?.length === 0 && <p className={style["blog-warning-text"]}>No blogs available.</p>}
         </div>
     );
 }

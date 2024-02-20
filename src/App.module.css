@@ -1,4 +1,6 @@
 .blog {
+    display: grid;
+    gap: 1rem;
     padding: 1rem;
 
     & .blog-inputs {
@@ -23,8 +25,19 @@
 
     & .blog-cards {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 1rem;
-        place-items: center;
+    }
+
+    & .blog-warning-text {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .blog {
+        & .blog-cards {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
     }
 }

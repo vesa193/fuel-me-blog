@@ -1,19 +1,18 @@
 import style from "./Card.module.css";
 import crossIcon from "../../assets/icons/times-icon.svg";
+import { Blog } from "../../App";
 
-const Card = () => {
+type CardProps = Blog & { onRemove: (id: string) => void };
+
+const Card = ({ id, title, text, author, onRemove }: CardProps) => {
     return (
         <div className={style.card}>
             <div className={style["card-title"]}>
-                <h4>About me</h4>
-                <img src={crossIcon} alt="cross-icon" />
+                <h4>{title}</h4>
+                <img src={crossIcon} alt="cross-icon" onClick={() => onRemove(id)} />
             </div>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. In quis placeat est libero? Rem neque quisquam
-                ab incidunt magnam nemo nobis reiciendis, tenetur nesciunt explicabo ad reprehenderit perferendis id
-                temporibus.
-            </p>
-            <small>Posted by Sofia</small>
+            <p>{text}</p>
+            <small>Posted by {author}</small>
         </div>
     );
 };
